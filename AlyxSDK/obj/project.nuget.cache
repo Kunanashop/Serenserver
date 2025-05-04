@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "CQfB3+9QLGnvAoBMhLvKYzmcUZ/As7GnRhmmZWZR2/ucixD/WYy7JICenqzQNyVrssiX6wthJ/Mu4/q7eiPZcA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\gymyc\\Downloads\\alyx-rp_ragemp.pro\\dotnet\\resources\\GameMode\\AlyxSDK\\AlyxSDK.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gymyc\\.nuget\\packages\\mysqlconnector\\1.3.0-beta.2\\mysqlconnector.1.3.0-beta.2.nupkg.sha512",
+    "C:\\Users\\gymyc\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.113.2\\stub.system.data.sqlite.core.netstandard.1.0.113.2.nupkg.sha512",
+    "C:\\Users\\gymyc\\.nuget\\packages\\system.data.sqlite.core\\1.0.113.7\\system.data.sqlite.core.1.0.113.7.nupkg.sha512"
+  ],
+  "logs": []
+}
