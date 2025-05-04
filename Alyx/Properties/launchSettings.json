@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "Alyx": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\gymyc\\Downloads\\alyx-rp_ragemp.pro\\ragemp-server.exe",
+      "workingDirectory": "..\\..\\..\\..\\..\\server",
+      "console": "externalTerminal",
+      "type": "coreclr",
+      "cwd": "..\\..\\..\\..\\..\\server/",
+      "preLaunchTask": "compile",
+      "name": "RAGE-MP Launch (build)",
+      "stopAtEntry": false,
+      "request": "launch",
+      "internalConsoleOptions": "neverOpen",
+      "program": "ragemp-server.exe"
+    }
+  }
+}

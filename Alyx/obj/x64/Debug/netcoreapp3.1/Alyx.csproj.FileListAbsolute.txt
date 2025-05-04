@@ -1,0 +1,31 @@
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\release\bin\netcoreapp3.1\Alyx.deps.json
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\release\bin\netcoreapp3.1\Alyx.dll
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\release\bin\netcoreapp3.1\Alyx.pdb
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csprojAssemblyReference.cache
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.AssemblyInfoInputs.cache
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.AssemblyInfo.cs
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.CoreCompileInputs.cache
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.CopyComplete
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.dll
+C:\Users\ilyaS\Downloads\Moon 2.0-20220228T184245Z-001\Moon 2.0\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.pdb
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\release\bin\netcoreapp3.1\Alyx.deps.json
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\release\bin\netcoreapp3.1\Alyx.dll
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\release\bin\netcoreapp3.1\Alyx.pdb
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.AssemblyInfo.cs
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.CopyComplete
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.dll
+C:\Users\user\Desktop\AlyxRP\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.pdb
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\release\bin\netcoreapp3.1\Alyx.deps.json
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\release\bin\netcoreapp3.1\Alyx.dll
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\release\bin\netcoreapp3.1\Alyx.pdb
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.AssemblyReference.cache
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.AssemblyInfoInputs.cache
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.AssemblyInfo.cs
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.CoreCompileInputs.cache
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.csproj.CopyComplete
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.dll
+C:\Users\gymyc\Downloads\alyx-rp_ragemp.pro\dotnet\resources\GameMode\Alyx\obj\x64\Debug\netcoreapp3.1\Alyx.pdb

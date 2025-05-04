@@ -1,0 +1,10 @@
+G:\Shadowproject\dotnet\resources\release\bin\netcoreapp3.1\Shadow.deps.json
+G:\Shadowproject\dotnet\resources\release\bin\netcoreapp3.1\Shadow.dll
+G:\Shadowproject\dotnet\resources\release\bin\netcoreapp3.1\Shadow.pdb
+G:\Shadowproject\dotnet\resources\GameMode\Shadow\obj\x64\Debug\netcoreapp3.1\Shadow.csprojAssemblyReference.cache
+G:\Shadowproject\dotnet\resources\GameMode\Shadow\obj\x64\Debug\netcoreapp3.1\Shadow.AssemblyInfoInputs.cache
+G:\Shadowproject\dotnet\resources\GameMode\Shadow\obj\x64\Debug\netcoreapp3.1\Shadow.AssemblyInfo.cs
+G:\Shadowproject\dotnet\resources\GameMode\Shadow\obj\x64\Debug\netcoreapp3.1\Shadow.csproj.CoreCompileInputs.cache
+G:\Shadowproject\dotnet\resources\GameMode\Shadow\obj\x64\Debug\netcoreapp3.1\Shadow.csproj.CopyComplete
+G:\Shadowproject\dotnet\resources\GameMode\Shadow\obj\x64\Debug\netcoreapp3.1\Shadow.dll
+G:\Shadowproject\dotnet\resources\GameMode\Shadow\obj\x64\Debug\netcoreapp3.1\Shadow.pdb
