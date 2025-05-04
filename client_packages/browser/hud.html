@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="./assets/css/chat.css">
+    <link rel="stylesheet" href="./assets/css/hud_new.css">
+    <!-- <link rel="stylesheet" href="./assets/css/noty.css" /> -->
+    <link rel="stylesheet" href="./assets/css/new-notify.css" />
+    <!-- <link rel="stylesheet" href="./assets/css/theme.css" /> -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
+<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body style="background: none;">
+
+	<div class="inGameHud" v-if="show">
+		<div v-if="gangzone" class="gangzone">
+			<div class="timeblockgang">
+				{{min}}:{{sec}}
+				<svg fill="#fff" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					 viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
+				<g>
+					<g>
+						<path d="M244.5,0C109.3,0,0,109.3,0,244.5S109.3,489,244.5,489S489,379.8,489,244.5S379.8,0,244.5,0z M265.3,447.4V437
+							c0-11.4-9.4-20.8-20.8-20.8s-20.8,9.4-20.8,20.8v10.4c-95.8-9.8-172.3-86.3-182-182H51c11.4,0,20.8-9.4,20.8-20.8
+							s-9.4-20.8-20.8-20.8h-9.3c9.8-95.8,86.3-172.3,182-182V51c0,11.4,9.4,20.8,20.8,20.8s20.8-9.4,20.8-20.8v-9.3
+							c95.8,9.8,172.3,86.3,182,182H437c-11.4,0-20.8,9.4-20.8,20.8s9.4,20.8,20.8,20.8h10.4C437.6,361.1,361.1,437.6,265.3,447.4z"/>
+						<path d="M244.5,124.9c-11.4,0-20.8,9.4-20.8,20.8v91.5L129,353.8c-7.3,9.4-5.2,21.8,3.1,29.1c11.6,8.5,23.9,2.1,28.1-3.1
+							l101-122.8c2.1-3.1,4.2-7.3,4.2-12.5v-98.8C265.3,134.2,256,124.9,244.5,124.9z"/>
+					</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+				</svg>
+
+			</div>
+			<div :style="{color: allcolorfrac[fracatt-1]}" class="attack">
+				{{allfrac[fracatt-1]}}
+				<a>{{def}}</a>
+			</div>
+			<div :style="{color: allcolorfrac[fracdef-1]}" class="deffenders">
+				{{allfrac[fracdef-1]}}
+				<a>{{def}}</a>
+			</div>
+		</div>
+		<div id="safezone">
+			<div class="bgshadow"></div>
+			<div class="bgshadow2"></div>
+			<div class="rightup">
+				<div class="timebl">
+					<a>{{time}}</a>
+					<p>{{date}}</p>
+				</div>
+				<img src="https://i.imgur.com/zC7bcez.png" class="logotype">
+				<div class="namesrv">
+					<a>ALYX RP</a>
+					<p>by ragemp.pro</p>
+				</div>
+				<div class="playerinfo">
+					<a>Онлайн: {{online}}</a>
+					<p>[{{playerId}}] #{{personId}}</p>
+				</div>
+				<div class="allmissions">
+					<div v-if="activequest" class="missionblock">
+						<div class="namecatmission"><a>QUEST</a>ОСНОВНЫЕ ЗАДАЧИ</div>
+						<div class="namemission">{{namequest}}<a>{{countquest}}$</a></div>
+						<div class="linemission"></div>
+						<div class="textmissions">{{textquest}}</div>
+						<div style="margin-top: 2vw;" class="linemission"	></div>
+					</div>
+				</div>
+			</div>
+			
+			<div v-if="helpkeys" class="helpbottomnoty">
+				<a>{{helpkey}}</a><p>{{helptextkey}}</p>
+			</div>
+			
+			<div v-if="istate" class="additemblock">
+				<div class="addiblimg">
+					<a>{{icount}}</a>
+					<img :src="`./modules/Inventory/assets/images/icons/items/`+ iid + `.png`" class="icoadd">
+				</div>
+				<p>{{iname}}</p>
+			</div>
+			
+			<div v-if="hint" class="interact">
+				<div class="iconka"></div>
+				<div class="iconka2">E</div>
+				<div class="press">Нажмите для взаимодействия</div>
+			</div>
+			
+			<div class="exitmetro" v-if="showhelpmetro">
+				<a>E</a>ВЫЙТИ НА СТАНЦИЮ <b style="color: #6b6bfa">{{statinons[stationmetro]}}</b>
+			</div>
+			
+			<div v-if="timerheist != 0" class="timer">
+				<a>Ограбление магазина</a>
+				<div class="linetimer"><div :style="{width: + timerheist/3.16 + 'vw'}" class="lineactivetimer"></div></div>
+			</div>
+			
+			<div class="mapblock" :style="{left: 'calc(' + minimapFix + '% + ' + '20px)'}">
+				<div style="top: 1vw;" class="blmap">
+					<a>+{{weatherg}} °C <img src="./assets/images/hud/snow.svg" style="position: absolute; width: 1vw; margin-left: 0.3vw;"> <b style="margin-left: 2vw; font-weight: 400;">Солнечно</b></a>
+				</div>
+				<div class="blmap">
+					<a>{{crossingRoad}}</a>
+					<p>{{street}}</p>
+				</div>
+				<div class="blmap">
+					<a>$ {{money}}</a>
+					<p>$ {{bank}}</p>
+				</div>
+				<div class="micro"><img v-if="mic" src="./assets/images/hud/microon.png"><img v-if="!mic" src="./assets/images/hud/microoff.png"></div>
+				<div class="allstates">
+					<div v-if="greenzone" class="gz">
+						<img src="./assets/images/hud/greenzone.png">
+					</div>
+					<div v-if="fishzone" class="fz">
+						<img src="./assets/images/hud/hook.svg">
+					</div>
+					<div v-if="farmzone" class="faz">
+						<img src="./assets/images/hud/seed.svg">
+					</div>
+					<div v-if="adminmod" class="adm">
+						<img src="./assets/images/hud/shiled.svg">
+					</div>
+				</div>
+			</div>
+			
+			<div class="help">
+				<div class="bl"><a>N</a><p>Микрофон</p></div>
+				<div class="bl"><a>I</a><p>Инвентарь</p></div>
+				<div class="bl"><a>G</a><p>Взаимодействие</p></div>
+				<div class="bl"><a>9</a><p>Анимации</p></div>
+				<div class="bl"><a>M</a><p>Меню персонажа</p></div>
+				<div class="bl"><a>F3</a><p>Навигатор</p></div>
+				<div v-if="inVeh" class="bl"><a>B</a><p>Завести транспорт</p></div>
+				<div v-if="inVeh" class="bl"><a>L</a><p>Двери</p></div>
+				<div v-if="inVeh" class="bl"><a>J</a><p>Ремень</p></div>
+			</div>
+			
+			<div class="demorgan" v-if="demorgan">
+				<div class="updemorgan">
+					<a style="left: 1vw;">Администратор</a>
+					<p style="left: 1vw;">{{demorganadmin}}</p>
+					<a style="right: 1vw;">Осталось</a>
+					<p style="right: 1vw;">{{(demorgantime / 60).toFixed()}} минут</p>
+				</div>
+				<h1>Причина:</h1>
+				<b>{{demorganreason}}</b>
+			</div>
+			
+			<div v-if="ammo != -1" class="ammoblock">
+				<a>\ {{ammo}}</a>
+				<img :src="`./assets/images/hud/guns/w` + gun + `.png`" class="icogun">
+			</div>
+			
+			<div class="car-hud" v-if="inVeh">
+				<div class="contents-car">
+					<!-- Обороты -->
+					<div class="value-gear">
+						<svg viewBox="0 0 92 115" class="gears" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 14vh;">
+							<path opacity="0.4" d="M24.4379 111.542C-21.0623 65.5424 18.4375 -12.4578 89.9003 8.50505" stroke="white" stroke-width="9"/>
+							<path :style="{strokeDashoffset: 504.295, strokeDasharray: getRpm() }" class="fill" fill-rule="evenodd" stroke-linecap="butt" stroke-linejoin="miter" fill="none" stroke-width="9" d="M24.4379 111.542C-21.0623 65.5424 18.4375 -12.4578 89.9003 8.50505"/>   
+						</svg>
+					</div>
+					<div class="progress-ring-holder-rotating">
+						<div class="progress-ring-holder-wrapper" :style="{transform: 'rotate(' + ( rpm * 4.488 > 152.72 ? 152.72 :  rpm * 4.488) + 'deg)'}">
+							<div class="progress-ring-holder"></div>
+						</div>
+					</div>
+					<div class="info-gear">
+						<p>{{gear == 0 ? 'R' : gear}}</p>
+						<p>GEAR</p>
+					</div>
+					<div class="value-speed">
+						<svg xmlns="http://www.w3.org/2000/svg" width="27.5vh" height="22.4vh" viewBox="-4 -10 275 214">
+							<path fill-rule="evenodd" stroke="rgb(255, 255, 255)" stroke-width="17" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.4" fill="none" d="M60.340,185.660 C18.553,143.874 18.553,76.126 60.340,34.340 C102.126,-7.447 169.874,-7.447 211.660,34.340 C253.446,76.126 253.446,143.874 211.660,185.660 "></path>
+							<path fill-rule="evenodd" stroke-width="17" stroke-linecap="butt" stroke-linejoin="miter" opacity="1" fill="none" class="fill" :class="{animated: speed >= 180}" :style="{strokeDashoffset: 504.295, strokeDasharray: getSpeed() }"  d="M60.340,185.660 C18.553,143.874 18.553,76.126 60.340,34.340 C102.126,-7.447 169.874,-7.447 211.660,34.340 C253.446,76.126 253.446,143.874 211.660,185.660 "></path>
+						</svg>
+					</div>
+					<div class="progress-ring-holder-rotating1">
+						<div class="progress-ring-holder-wrapper1" :style="{transform: 'rotate(' + ( speed * 0.887  > 266 ? 266 :  speed * 0.887 ) + 'deg)'}">
+							<div class="progress-ring-holder1" :class="{active: speed >= 180}"></div>
+						</div>
+					</div>
+					<div class="info-speed">
+						<p>{{speed}}</p>
+						<p>KM/H</p>
+						<p>{{mile}}KM</p>
+					</div>
+					<div class="value-fuel">
+						<svg viewBox="0 0 52 158" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 7vh;">
+							<path opacity="0.4" d="M13.5 154.5C65 109 52.5 37 3.00215 4" stroke="white" stroke-width="9"/>
+							<path :style="{strokeDasharray: 504.295, strokeDashoffset: 504.295 - (fuel) * 1.75 }" class="fill" stroke-width="9" stroke-linecap="butt" stroke-linejoin="miter" opacity="1" fill="none" d="M13.5 154.5C65 109 52.5 37 3.00215 4" />
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div id="notify"></div>
+        <div id="effect"></div>
+        
+    </div>
+	<div id="chat" class="chat" v-cloak>
+		<ul id="chat_messages"></ul>
+	</div>
+    <script src="./assets/js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="./assets/js/hud.js"></script>
+    <script src="./assets/js/chat.js"></script>
+    <script src="./assets/js/noty.min.js"></script>
+    <script src="./assets/js/notify.js"></script>
+	
+	
+
+
+    <script>
+        function hidehud(toggle) {
+            if (toggle) {
+                HUD.show = false;
+                logotype.show = false;
+            } else {
+                HUD.show = true;
+                logotype.show = true;
+            }
+        }
+        function hidehelp(toggle) {
+            if (toggle) {
+                $('.help').hide();
+            } else {
+                $('.help').show();
+            }
+        }
+		</script>
+
+    <script>function updateSafeZoneSize(screenWidht, screenHeight, safeZoneSize) {var savezoneDiv = document.getElementById("safezone");safeZoneSize = (((1.0 - safeZoneSize) * 0.5) * 100.0);savezoneDiv.style.right = savezoneDiv.style.left = ((screenWidht / 100) * safeZoneSize) + "px";savezoneDiv.style.top = savezoneDiv.style.bottom = ((screenHeight / 100) * safeZoneSize) + "px";return true;}</script>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6db4653be9385f98',m:'Wk0My.HYVoOfguzItt5nXgPmOSkQgBpcdFp33eYinZI-1644486230-0-Ac21H3+Pp6KLHljGKW0ClJhijr9NmaDMt6rASu6r+w+fZr1gOw0g9BmIAzB4Qw7AiydA8xGPEN6CStwpr0OGlcObjRFTllPcEKW7iGggeKEdxfnQGI686Qa1r5/oK3GF5xAbOQUM6YoDdqFYwOb+WJ8DhYjZmbtuBBhe86YHjHhVlYh5EekMvP6rGMmf5y95CQ==',s:[0xf5207b6be0,0x57624e8625],}})();</script><script type="text/javascript">(function(){window['__CF$cv$params']={r:'6db4822f1c36387b',m:'G7Dlq56B_cRyYuwUOY_ONPxLlqoVc04TM8QvpAS36PE-1644487416-0-AWrC94gwMaxfz3Jy4/Q2X8n5j1WZD6nvep3EUKBQ6PGXj3F1r/JgU3gb8QMoXTdQOeQHir8JpA4BnMDNHLl/0sdNsjHchDNVxgBh6Kc86gTBfTsgcQxqEpGOf/+ylk2Aqt5Usheo79EARmIOtXeA+KQSYe8w6wfoSRFG/LzKElbMhhF4rPTeyNbeB/KfwzoKSA==',s:[0x3106d9cffe,0xafb62abc48],}})();</script><script type="text/javascript">(function(){window['__CF$cv$params']={r:'6db482d27ecf3a77',m:'ClaJhlXSqpRjz632Ob3hh5EQ9fiABlTRtZZHDp21fek-1644487442-0-AQ9fBAp33/lyIlZ/IT+vhLrdj9u/s85IPR0b69rlizKlTIUkEuUq1tbuGqn/p6kILK63LgPV4H9eO/i1IhI8uYTxFa2sian6Yz+npw0pLYKruG7lhpSp+Rkbw2qOiyWylq7YA4h9xFN8Hh1qHmdUg3Eh4fpFP7MCvgU7b4rCdcQ5DP5pF4KwTj41WMcxa1pT/g==',s:[0x3a3db8d7f4,0x6ad605499e],}})();</script></body>
+</html>
