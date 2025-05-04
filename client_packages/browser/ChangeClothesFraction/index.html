@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="fonts/font/stylesheet.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/index.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet">
+	<script src="./js/library/vue.js"></script>
+</head>
+
+<body>
+	<div class="changeclothes">
+		<div class="nameblock">
+			<a>РАЗДЕВАЛКА</a>
+			<p>{{name}}</p>
+		</div>
+		<div class="items" v-if="menuid==''">
+			<div class="block" @click="menuid='Майки'">
+				<div class="text">Майки</div>
+			</div>
+			<div class="block" @click="menuid='Маски'">
+				<div class="text">Маски</div>
+			</div>
+			<div class="block" @click="menuid='Вверх'">
+				<div class="text">Вверх</div>
+			</div>
+			<div class="block" @click="menuid='Шапки'">
+				<div class="text">Шапки</div>
+			</div>
+			<div class="block" @click="menuid='Очки'">
+				<div class="text">Очки</div>
+			</div>
+			<div class="block" @click="menuid='Штаны'">
+				<div class="text">Штаны</div>
+			</div>
+			<div class="block" @click="menuid='Часы'">
+				<div class="text">Часы</div>
+			</div>
+			<div class="block" @click="clearPerson()">
+				<div class="text">Снять одежду</div>
+			</div>
+		</div>
+		<div class="items" v-else>
+			<div v-for="item in items[menuid]" class="block" @click="setFracChange(item)">
+				<div class="text">{{item}}</div>
+			</div>
+			<div class="block" @click="menuid=''">
+				<div class="text">Назад</div>
+			</div>
+		</div>
+		<div @click="exit()" class="btn">
+			ПОДТВЕРДИТЬ
+		</div>
+		<div class="btn2"></div>
+	</div>
+    <script src="./js/index.js"></script>
+	<script src="./js/library/jquery-3.2.1.min.js"></script>
+</body>
+</html>
