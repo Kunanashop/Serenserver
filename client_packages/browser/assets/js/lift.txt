@@ -1,0 +1,218 @@
+var death = new Vue({
+    el: '.death_window',
+    data: {
+        active: false,
+		buttonact: true,
+		time: "",
+        title: "Вы действительно хотите получить по бороде?",
+    },
+    methods: {
+        yes: function () {
+            mp.trigger('dialogCallbackMED',true)
+			buttonact = false;
+        },
+        no: function () {
+            mp.trigger('dialogCallbackMED',false)
+			buttonact = false;
+        }
+    }
+})
+
+
+mp.events.add("openDialogMED", (c, q) => {
+  global.dialog.cBack = c;
+  global.dialog.question = q;
+  global.dialog.openMED();
+  mp.events.call('showHUD', true);
+  mp.gui.cursor.visible = true;
+  mp.game.graphics.startScreenEffect("DeathFailOut", 0, true);
+  // mp.game.graphics.startScreenEffect("SwitchOpenNeutralFIB5", 0, true);
+});
+mp.events.add("closeDialogMED", () => {
+  global.dialog.closeMED();
+  mp.events.call('showHUD', true);
+  global.menu.execute(`death.closeMED()`);
+});
+mp.events.add("dialogCallbackMED", (state) => {
+  mp.events.callRemote("dialogCallbackMEDIC", state);
+});
+
+
+
+        public void onPlayerDeathHandler(Player player, Player entityKiller, uint weapon)
+        {
+            try
+            {
+                if (!Main.Players.ContainsKey(player)) return;
+                if (player.HasData("ARENA")) return;
+                if (player.HasData("CARROOMID") && player.HasData("LAST_HP"))
+                {
+                    player.Health = player.GetData<int>("LAST_HP");
+                    return;
+                }
+                Log.Debug($"{player.Name} is died by {weapon} {entityKiller}");
+
+                FractionCommands.onPlayerDeathHandler(player, entityKiller, weapon);
+                SafeMain.onPlayerDeathHandler(player, entityKiller, weapon);
+                Weapons.Event_PlayerDeath(player, entityKiller, weapon);
+                Army.Event_PlayerDeath(player, entityKiller, weapon);
+                Police.Event_PlayerDeath(player, entityKiller, weapon);
+                Houses.HouseManager.Event_OnPlayerDeath(player, entityKiller, weapon);
+
+                Jobs.Collector.Event_PlayerDeath(player, entityKiller, weapon);
+                Jobs.Gopostal.Event_PlayerDeath(player, entityKiller, weapon);
+
+                if (player.HasData("job_farmer")) Jobs.FarmerJob.Farmer.StartWork(player, false);
+                if (player.HasData("Phone")) MenuManager.Close(player);
+
+                //VehicleManager.WarpPlayerOutOfVehicle(player);
+                Main.Players[player].IsAlive = false;
+                if (player.HasData("AdminSkin"))
+                {
+                    player.ResetData("AdminSkin");
+                    player.SetSkin((Main.Players[player].Gender) ? PedHash.FreemodeMale01 : PedHash.FreemodeFemale01);
+                    Customization.ApplyCharacter(player);
+                }
+                Trigger.ClientEvent(player, "screenFadeOut", 2000);
+
+                var dimension = player.Dimension;
+
+                if (Main.Players[player].DemorganTime != 0 || Main.Players[player].ArrestTime != 0)
+                    player.SetData("IS_DYING", true);
+                player.SetSharedData("IS_DYING", true);
+
+                if (!player.HasData("IS_DYING"))
+                {
+                    player.SetSharedData("InDeath", true);
+                    player.SetData("IS_STATE", true);
+                    player.SetData("DYING_POS", player.Position);
+                    var medics = 0;
+                    Main.Players[player].IsAlive = false;
+                    foreach (var m in Manager.Members) if (m.Value.FractionID == 8) medics++;
+
+                    string text = "";
+                    if (entityKiller != null && entityKiller != player && Main.Players.ContainsKey(player))
+                        text = $"Вас убил ({entityKiller.Id}) #{entityKiller.GetSharedData<int>("PERSON_ID")}";
+
+                    Trigger.ClientEvent(player, "openDialogMED", $"Вы хотите вызвать медиков ({medics} в сети)?", text);
+                }
+                else
+                {
+                    NAPI.Task.Run(() => {
+                        try
+                        {
+                            if (!Main.Players.ContainsKey(player)) return;
+
+                            if (player.HasData("DYING_TIMER"))
+                            {
+                                //Main.StopT(player.GetData("DYING_TIMER"), "timer_9");
+                                Timers.Stop(player.GetData<string>("DYING_TIMER"));
+                                player.ResetData("DYING_TIMER");
+                            }
+
+                            if (player.HasData("CALLEMS_BLIP"))
+                            {
+                                NAPI.Entity.DeleteEntity(player.GetData<Blip>("CALLEMS_BLIP"));
+                                player.ResetData("CALLEMS_BLIP");
+                            }
+
+                            if (player.HasData("CALLEMS_COL"))
+                            {
+                                NAPI.ColShape.DeleteColShape(player.GetData<ColShape>("CALLEMS_COL"));
+                                player.ResetData("CALLEMS_COL");
+                            }
+
+                            Trigger.ClientEvent(player, "DeathTimer", false);
+                            player.SetSharedData("InDeath", false);
+                            var spawnPos = new Vector3();
+
+                            if (Main.Players[player].DemorganTime != 0)
+                            {
+                                spawnPos = Admin.DemorganPosition + new Vector3(0, 0, 1.12);
+                                dimension = 1337;
+                            }
+                            else if (Main.Players[player].ArrestTime != 0)
+                                spawnPos = Police.policeCheckpoints[4];
+                            else if (Main.Players[player].FractionID == 14)
+                                spawnPos = Fractions.Manager.FractionSpawns[14] + new Vector3(0, 0, 1.12);
+                            else
+                            {
+                                player.SetData("IN_HOSPITAL", true);
+                                spawnPos = emsCheckpoints[2];
+                            }
+
+                            NAPI.Player.SpawnPlayer(player, spawnPos);
+                            NAPI.Player.SetPlayerHealth(player, 20);
+                            player.ResetData("IS_DYING");
+                            player.ResetData("IS_STATE");
+                            player.ResetSharedData("IS_DYING");
+                            Main.Players[player].IsAlive = true;
+                            Main.OffAntiAnim(player);
+                            NAPI.Entity.SetEntityDimension(player, dimension);
+                            Trigger.ClientEvent(player, "screenDeath");
+                        }
+                        catch { }
+                    }, 4000);
+                }
+            }
+            catch (Exception e) { Log.Write("PlayerDeath: " + e.Message, nLog.Type.Error); }
+        }
+
+        public static void DeathConfirm(Player player, bool call)
+        {
+
+            if (Main.Players[player].DemorganTime != 0)
+            {
+                var spawnPos = Admin.DemorganPosition + new Vector3(0, 0, 1.12);
+                uint dimension = 1337;
+                NAPI.Player.SpawnPlayer(player, spawnPos);
+                NAPI.Player.SetPlayerHealth(player, 20);
+                player.ResetData("IS_DYING");
+                player.ResetData("IS_STATE");
+                Main.Players[player].IsAlive = true;
+                Main.OffAntiAnim(player);
+                Trigger.ClientEvent(player, "screenDeath");
+                NAPI.Entity.SetEntityDimension(player, dimension);
+                Trigger.ClientEvent(player, "closeDialogMED");
+                return;
+            }
+            NAPI.Player.SpawnPlayer(player, player.Position);
+            NAPI.Entity.SetEntityDimension(player, 0);
+
+            Main.OnAntiAnim(player);
+            player.SetData("IS_DYING", true);
+            player.SetData("DYING_POS", player.Position);
+
+            if (call) callEms(player, true);
+            Voice.Voice.PhoneHCommand(player);
+
+            NAPI.Player.SetPlayerHealth(player, 999);
+            var time = (call) ? 240000 : 120000;
+            Trigger.ClientEvent(player, "DeathTimer", time);
+            var timeMsg = "";
+            //player.SetData("DYING_TIMER", Main.StartT(time, time, (o) => { player.Health = 0; }, "DYING_TIMER"));
+            NAPI.Task.Run(() => { try { timeMsg = (call) ? "4 минут Вас не вылечит медик или кто-нибудь другой" : "2 минут Вас никто не вылечит"; player.SetData("DYING_TIMER", Timers.StartOnce(time, () => DeathTimer(player))); } catch { } });
+
+            var deadAnimName = deadAnims[Main.rnd.Next(deadAnims.Count)];
+            NAPI.Task.Run(() => { try { player.PlayAnimation("dead", deadAnimName, 39); } catch { } }, 500);
+
+            Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, $"Если в течение {timeMsg}, то Вы попадёте в больницу", 3000);
+        }
+
+        public static void DeathTimer(Player player)
+        {
+            NAPI.Task.Run(() => {
+                player.Health = 0;
+
+
+                if (player.HasData("CALLEMS_BLIP"))
+                {
+                    NAPI.Entity.DeleteEntity(player.GetData<Blip>("CALLEMS_BLIP"));
+                    Fractions.Manager.sendFractionMessage(8, $"{player.Name.Replace('_', ' ')} умер. Вы не успели его спасти!");
+                }
+                if (player.HasData("CALLEMS_COL"))
+                {
+                    NAPI.ColShape.DeleteColShape(player.GetData<ColShape>("CALLEMS_COL"));
+                }
+            });
+        }
